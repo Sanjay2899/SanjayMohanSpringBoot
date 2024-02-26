@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Tracker Application</title>
+    <link th:href="@{/styleUpdate.css}" rel="stylesheet">
+    <script
+
+	src="https://cdn.tiny.cloud/1/q775tfblz3jn3spe4123bm0efkanm5lkiqci6kmw7zvr5e5g/tinymce/5/tinymce.min.js"
+
+	referrerpolicy="origin"></script>
+
+	<script>
+
+        // Initialize TinyMCE
+
+        tinymce.init({
+
+            selector: '#myTextarea',
+
+            plugins: 'lists bold italic underline lists link image code media table hr wordcount fullscreen',
+
+            toolbar: 'formatselect | undo redo | bold italic underline | bullist numlist | bold italic underline strikethrough | link image media | hr',
+
+            menubar: false,
+
+            branding: false
+
+        });
+
+    </script>
+</head>
+<body>
+     <header class="header"> 
+        <h1>Ticket Tracker Application<a href="/admin/tickets/">Tickets</a>
+            <a href="add-record">New Ticket</a></h1>
+        
+        
+    </header>
+
+    <div class="form">
+        <h2>Edit Ticket</h2>
+        <form action="update-save" method="post">
+			<input  type="hidden" name="id" th:value="${t1.id}"/>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="tickettitle" th:value="${t1.tickettitle}" >
+
+            <label for="description">Short Description</label>
+            <input type="text" id="description" name="ticketshortdescription" th:value="${t1.ticketshortdescription}" >
+            <label for="content">Content</label>
+            <textarea id="myTextarea" name="content" placeholder="Enter content" th:field="${t1.content}"></textarea>
+
+
+            <button class="submit-btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

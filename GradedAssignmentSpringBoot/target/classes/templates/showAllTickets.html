@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Tracker Application</title>
+    <link th:href="@{/styleShow.css}" rel="stylesheet">
+</head>
+<body>
+     <header class="header"> 
+        <h1>Ticket Tracker Application<a href="/admin/tickets/">Tickets</a>
+            <a href="add-record">New Ticket</a></h1>
+        
+        
+    </header>
+     <br> <br>
+    <div align="left">
+        <form action="search">
+            <input type="text" name="search" placeholder="Search..." style="font-size: 18px;">
+            <button type="submit" style="font-size:18px;">Search</button>
+        </form>
+        <br>
+        <table border="2">
+            <tr>
+                <th>#</th>
+                <th>Ticket Title</th>
+                <th>Ticket Short Description</th>
+                <th>Ticket Created</th>
+                <th colspan="3">Action</th>
+            </tr>
+            <tr th:each="temp : ${tApplications}">
+                <td th:text="${temp.id}"></td>
+                <td th:text="${temp.tickettitle}"></td>
+                <td th:text="${temp.ticketshortdescription}"></td>
+                <td th:text="${temp.ticketcreated}"></td>
+                <td>
+                    <button style="background-color: blue;">
+                        <a style="color: white;" th:href="@{update-ticket(Id=${temp.id})}">Edit</a>
+                    </button>
+                </td>
+                <td>
+					<form action="#" th:action="@{delete-ticket(Id=${temp.id})}" method="get">
+					
+						<input type="hidden" name="Id" th:value="${temp.id}" />
+                    <button style="background-color: red;"  type="submit" class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to delete this Ticket ?'))) return false">
+								Delete
+						</button>
+					</form>
+                </td>
+                <td>
+                    <button style="background-color: green;">
+                        <a style="color: white;" th:href="@{view(Id=${temp.id})}">View</a>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
